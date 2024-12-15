@@ -1,45 +1,66 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
+import { cardApiService } from "../../ApiService/ApiService";
+import "./styles.css";
 
 
-export const Table = ({ cards = [] }) => {
-  if (!cards || !Array.isArray(cards)) {
-    return <div>No data</div>;
-  }
-  return (
-    <div>
+
+export const Table = () => {
+  const [cards, setCards] = useState([]);   
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const data = await cardApiService.getWords();
+        setCards(data);
+      } catch (error) {
+        console.error("Ошибка при получении данных:", error);
+      }
+    };
+    fetchCards();
+  }, []);
+
+   cards.forEach((card) => {
+    if (card.english && card.russian) {
+      card.english = card.english.toLowerCase();
+      card.russian = card.russian.toLowerCase();  
+          }
+  })
+    return (
+    <div className="table-wrapper">
       <table border="1">
         <thead>
           <tr>
-            <th>N/N</th>
+            <th>n/n</th>
             <th>English</th>
             <th>Transcription</th>
             <th>Russian</th>
-            <th>Buttons</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {cards.map((card) => {
-            return <TableRow card={card} key={card.id} />;
+            return <TableRow rowData={card} key={card.id} />;
           })}
         </tbody>
       </table>
     </div>
   );
 };
-
 const TableRow = ({ rowData }) => {
+  console.log(rowData);
   const { id, english, transcription, russian } = rowData;
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({ id, english, transcription, russian });
 
   function handleClose() {
-    setIsSelected(!isSelected); 
-    setValue({...rowData}); 
+    setIsSelected(!isSelected);
+    setValue({ ...rowData });
   }
 
   function handleSave() {
     setValue({ ...value });
-    setIsSelected(!isSelected); 
+    setIsSelected(!isSelected);
   }
 
   function handleEdit() {

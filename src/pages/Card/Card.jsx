@@ -1,5 +1,4 @@
-import { Link} from "react-router";
-import { ROUTES } from "../../routes/routes.js";
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
 export const Card = ({ english }) => {
@@ -27,7 +26,7 @@ export const Card = ({ english }) => {
           </div>
         )}
       </div>
-      <Link to={ROUTES.cards}>Назад</Link>
+      
     </>
   );
 };

@@ -18,7 +18,7 @@ export const Home = () => {
       <p>
         <Link to={ROUTES.cards}>Cards</Link>
       </p>
-      <Table cards = {[]} />
+      <Table cards={[]} />
       <button onClick={goToCardsHandler}>Go to cards</button>
     </>
   );

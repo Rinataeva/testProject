@@ -7,7 +7,7 @@ class CardApiService {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching words:", error);
+      console.error("Ошибка при получении данных:", error);
       return []; 
     }
   }

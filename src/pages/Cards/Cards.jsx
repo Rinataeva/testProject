@@ -3,6 +3,7 @@ import { ROUTES } from "../../routes/routes.js";
 import { Card } from "../Card/Card.jsx";
 import { useState, useEffect } from "react";
 import { cardApiService } from "../../ApiService/ApiService.js";
+import "./styles.css";
 
 export const Cards = () => {
   const [words, setWords] = useState([]);
@@ -35,7 +36,7 @@ export const Cards = () => {
 
   return (
     <section className="cards-section">
-      <h1>Cards</h1>
+      <h1></h1>
       <p>
         <Link to={ROUTES.home}>Home</Link>
       </p>
@@ -54,6 +55,7 @@ export const Cards = () => {
       <div className="progress">
         {currentIndex + 1}/{words.length}
       </div>
+      <Link to={ROUTES.home}>Назад</Link>
     </section>
   );
 };
