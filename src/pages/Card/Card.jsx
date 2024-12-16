@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
+
 export const Card = ({ english }) => {
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState(english);
+
 
   function getValue(event) {
     const newValue = event.target.value;
@@ -12,7 +14,7 @@ export const Card = ({ english }) => {
 
   return (
     <>
-      <div>
+      <div className="card">
         {isSelected ? (
           <input
             type="text"
@@ -25,6 +27,8 @@ export const Card = ({ english }) => {
             {english}
           </div>
         )}
+
+      
       </div>
       
     </>

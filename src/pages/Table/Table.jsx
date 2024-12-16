@@ -5,6 +5,7 @@ import "./styles.css";
 
 
 
+
 export const Table = () => {
   const [cards, setCards] = useState([]);   
 
@@ -28,12 +29,12 @@ export const Table = () => {
   })
     return (
     <div className="table-wrapper">
-      <table border="1">
+      <table className="table" border="1">
         <thead>
           <tr>
             <th>n/n</th>
             <th>English</th>
-            <th>Transcription</th>
+            <th>pronunciation</th>
             <th>Russian</th>
             <th>Action</th>
           </tr>
@@ -102,8 +103,8 @@ const TableRow = ({ rowData }) => {
         />
       </td>
       <td>
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleClose}>Close</button>
+        <button className="tableBtn" onClick={handleSave}>Save</button>
+        <button className="tableBtn" onClick={handleClose}>Close</button>
       </td>
     </tr>
   ) : (
@@ -113,8 +114,8 @@ const TableRow = ({ rowData }) => {
       <td>{value.transcription}</td>
       <td>{value.russian}</td>
       <td>
-        <button onClick={handleEdit}>Edit</button>
-        <button>Delete</button>
+        <button className="tableBtn" onClick={handleEdit}>edit</button>
+        <button className="tableBtn">delete</button>
       </td>
     </tr>
   );

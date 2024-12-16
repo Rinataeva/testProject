@@ -7,7 +7,7 @@ import "./styles.css";
 
 export const Cards = () => {
   const [words, setWords] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0); // Track current word index
+  const [currentIndex, setCurrentIndex] = useState(0); 
 
   useEffect(() => {
     fetchWords();
@@ -37,15 +37,12 @@ export const Cards = () => {
   return (
     <section className="cards-section">
       <h1></h1>
-      <p>
-        <Link to={ROUTES.home}>Home</Link>
-      </p>
       <div className="card-swiper">
-        <button onClick={handleBackwardClick} disabled={currentIndex === 0}>
+        <button className="cardBtn" onClick={handleBackwardClick} disabled={currentIndex === 0}>
           {"<-"}
         </button>
         {words.length > 0 && <Card english={words[currentIndex].english} />}
-        <button
+        <button className="cardBtn"
           onClick={handleForwardClick}
           disabled={currentIndex === words.length - 1}
         >
@@ -55,7 +52,7 @@ export const Cards = () => {
       <div className="progress">
         {currentIndex + 1}/{words.length}
       </div>
-      <Link to={ROUTES.home}>Назад</Link>
+      <Link to={ROUTES.home}>Back</Link>
     </section>
   );
 };
