@@ -1,56 +1,60 @@
 .cards-section {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 3rem auto;
+    padding: 2rem;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    box-shadow:0 1rem 2rem rgba(0, 0, 0, 0.1);
+    min-width: 50%;
   }
   
   .cards-section h1 {
-    font-size: 24px;
     color: #333;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
   }
   
   .card-swiper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
+    gap: 3rem;
+    position: relative;
   }
     
   .progress {
-    margin-top: 10px;
+    margin-top: 3rem;
     text-align: center;
-    font-size: 16px;
     color: #555;
+    font-size: 0.7rem;
   }
   
   .card {
     display: inline-block;
-    padding: 20px;
+    padding: 2rem;
     background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 0.2rem solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.05);
     text-align: center;
-    width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 18rem;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
   }
   
   .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);  
+
+  }
+  .cardBtn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #4d1a7c;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  .card h3 {
-    font-size: 20px;
-    color: #333;
-  }
+  .cardBtn:hover {
+    background-color: #5f2b9c;
   
-  .card p {
-    font-size: 16px;
-    color: #666;
-  }
