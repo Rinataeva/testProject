@@ -1,8 +1,8 @@
 import { Navigation } from "../Header/Navigation/Navigation"
+import "./styles.css"
 
 export function Footer() {
-    return (<footer>
-        EasyWordsApp
+    return (<footer className="footer">
         <Navigation />
     </footer>);
 }

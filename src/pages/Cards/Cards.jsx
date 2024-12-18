@@ -35,23 +35,24 @@ export const Cards = () => {
   };
 
   return (
+
     <section className="cards-section">
-      <h1></h1>
-      <div className="card-swiper">
-        <button className="cardBtn" onClick={handleBackwardClick} disabled={currentIndex === 0}>
+      <div className="progress">
+        {currentIndex + 1}/{words.length}
+      </div>
+      <div className="cards-swiper">
+        <button className="cards-swiper__button" onClick={handleBackwardClick} disabled={currentIndex === 0}>
           {"<-"}
         </button>
         {words.length > 0 && <Card english={words[currentIndex].english} />}
-        <button className="cardBtn"
+        <button className="cards-swiper__button"
           onClick={handleForwardClick}
           disabled={currentIndex === words.length - 1}
         >
           {"->"}
         </button>
       </div>
-      <div className="progress">
-        {currentIndex + 1}/{words.length}
-      </div>
+      
       <Link to={ROUTES.home}>Back</Link>
     </section>
   );

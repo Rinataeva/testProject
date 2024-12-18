@@ -2,6 +2,10 @@
 import { useState, useEffect } from "react";
 import { cardApiService } from "../../ApiService/ApiService";
 import "./styles.css";
+import  editIcon from "../../assets/edit-icon.svg";
+import  deleteIcon  from "../../assets/delete-icon.svg";
+import saveIcon from "../../assets/save-icon.svg";
+import closeIcon from "../../assets/close-icon.svg";
 
 
 
@@ -103,8 +107,8 @@ const TableRow = ({ rowData }) => {
         />
       </td>
       <td>
-        <button className="tableBtn" onClick={handleSave}>Save</button>
-        <button className="tableBtn" onClick={handleClose}>Close</button>
+        <button className="table__button" onClick={handleSave}><img src={saveIcon} className="table__button_icon" alt="save" /></button>
+        <button className="table__button" onClick={handleClose}><img src={closeIcon} className="table__button_icon" alt="close" /></button>
       </td>
     </tr>
   ) : (
@@ -114,8 +118,8 @@ const TableRow = ({ rowData }) => {
       <td>{value.transcription}</td>
       <td>{value.russian}</td>
       <td>
-        <button className="tableBtn" onClick={handleEdit}>edit</button>
-        <button className="tableBtn">delete</button>
+        <button className="table__button" onClick={handleEdit}><img src={editIcon} className="table__button_icon" alt="edit" /></button>
+        <button className="table__button"><img src={deleteIcon} className="table__button_icon" alt="delete" /></button>
       </td>
     </tr>
   );
