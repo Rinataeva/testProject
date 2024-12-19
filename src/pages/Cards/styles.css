@@ -14,7 +14,7 @@
   margin-bottom: 3rem;
   font-size: 3rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.1rem;
 }
 
 .cards-swiper {
@@ -22,7 +22,7 @@
   justify-content: center;
   gap: 4rem;
   position: relative;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   margin: 2rem auto;
 }
 
@@ -34,26 +34,6 @@
   font-weight: 600;
 }
 
-.card {
-  display: inline-block;
-  padding: 3rem;
-  background-color: #222;
-  border: 2px solid #444;
-  border-radius: 1rem;
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.6);
-  text-align: center;
-  width: 20rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  margin-bottom: 2rem; 
-  color: #888;
-}
-
-.card:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.8);
-}
-
 .cards-swiper__button {
   margin-top: 1rem;
   padding: 0.6rem 0.6rem;
@@ -63,7 +43,6 @@
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-
 }
 
 .cards-swiper__button:hover {
@@ -89,10 +68,6 @@
     gap: 3rem;
   }
 
-  .card {
-    width: 18rem; 
-  }
-
   .progress {
     font-size: 0.8rem;
   }
@@ -110,11 +85,6 @@
 
   s {
     gap: 2rem;
-  }
-
-  .card {
-    width: 16rem; 
-    padding: 2rem;
   }
 
   .progress {
@@ -135,11 +105,6 @@
 
   s {
     gap: 1.5rem;
-  }
-
-  .card {
-    width: 14rem; 
-    padding: 1.5rem;
   }
 
   .progress {
