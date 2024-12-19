@@ -44,7 +44,11 @@ export const Cards = () => {
         <button className="cards-swiper__button" onClick={handleBackwardClick} disabled={currentIndex === 0}>
           {"<-"}
         </button>
-        {words.length > 0 && <Card english={words[currentIndex].english} />}
+        {words.length > 0 && <Card 
+        english={words[currentIndex].english}
+        transcription={words[currentIndex].transcription}
+        russian={words[currentIndex].russian} />}
+        
         <button className="cards-swiper__button"
           onClick={handleForwardClick}
           disabled={currentIndex === words.length - 1}
