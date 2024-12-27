@@ -1,4 +1,4 @@
-import { Navigation } from "./Navigation/Navigation";
+import { Navigation } from "../Navigation/Navigation";
 // import logo from "../../../../assets/ewa.svg";
 // import { Link } from "react-router";
 // import { navLinks } from "./Navigation/navLinks";

@@ -1,8 +1,10 @@
-import { Navigation } from "../Header/Navigation/Navigation"
-import "./styles.css"
+import { Navigation } from "../Navigation/Navigation";
+import "./styles.css";
 
 export function Footer() {
-    return (<footer className="footer">
-        <Navigation />
-    </footer>);
+  return (
+    <footer className="footer">
+      <Navigation />
+    </footer>
+  );
 }
