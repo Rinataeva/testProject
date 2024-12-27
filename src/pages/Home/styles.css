@@ -17,7 +17,6 @@
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
     max-width: 20rem; 
   }
   
@@ -25,7 +24,37 @@
     background-color: #b12d2d;
     transform: scale(1.05);
   }
+  .home-page h2 {
+    margin: 0.2rem;
+    color: #e93c3c;
+    font-family: "Poppins", serif;
+    font-weight: 900;
+    font-size: 2.1rem;
+  }
+  .home-page h3 {
+    margin-top: 0;
+    color: #b12d2d;
+    font-family: "Montserrat", serif;
+    font-weight: 200;
+    font-size: 1.5rem;
+  }
   
+  .home-page__link {
+    color: #e93c3c;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .home-page__link:hover {
+    color: rgb(77, 26, 124);
+   
+  }
+  
+  .home-page__button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(233, 60, 60, 0.6);
+  }
   button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(233, 60, 60, 0.6);

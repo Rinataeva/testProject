@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playwrite+DE+Grund+Guides&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+GB+S+Guides:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -9,7 +8,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", serif;
 }
 html {
   scroll-behavior: smooth;
@@ -21,3 +20,17 @@ html {
   min-height: 100vh;
 
 }
+a {
+  text-decoration: none;
+  color: rgb(77, 26, 124);
+  font-weight: semibold;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #b12d2d;
+  transform: scale(1.02);
+  font-size: bolder;
+
+}
+

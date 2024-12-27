@@ -9,7 +9,7 @@
 }
 
 .cards-section h1 {
-  color: #fff;
+  color: black;
   text-align: center;
   margin-bottom: 3rem;
   font-size: 3rem;
@@ -35,8 +35,7 @@
 }
 
 .cards-swiper__button {
-  margin-top: 1rem;
-  padding: 0.6rem 0.6rem;
+  padding: 0.7rem 0.7rem;
   background-color: #e93c3c;
   color: #fff;
   border: 1px solid #e93c3c;
@@ -54,6 +53,22 @@
   outline: none;
   box-shadow: 0 0 0 3px rgba(233, 60, 60, 0.6);
 }
+.cards__footer{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cards__footer button{
+  padding: 0.7rem 0.7rem;
+  background-color: #e93c3c;
+  color: #fff;
+  border: 1px solid #e93c3c;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 
 @media (max-width: 1200px) {
   .cards-section {

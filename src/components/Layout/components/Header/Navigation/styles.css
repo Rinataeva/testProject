@@ -1,5 +1,6 @@
 .navigation {
     display: flex;
+    justify-content: space-around;
     border: 0.2rem solid;
     border-radius: 0.2rem;
     padding: 0.2rem;
