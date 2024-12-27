@@ -8,6 +8,10 @@ export const navLinks = [
         link: ROUTES.cards,
         title: "Cards",
     },
+    {
+        link: ROUTES.logIn,
+        title: "Log in",
+    },
   
 ]   
 
