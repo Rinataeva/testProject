@@ -1,6 +1,6 @@
 export const ROUTES = {
   home: '/',
-  table: '/table',
   cards: '/cards',
-  card: '/cards/:cardId',
+  card: '/cards/:card',
+  logIn: '/login',
 };
