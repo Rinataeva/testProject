@@ -11,6 +11,7 @@ export const Cards = () => {
   const [words, setWords] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { addWord } = useContext(CounterContext);
+  const [popUpMessage, setPopUpMessage] = useState("");
 
   useEffect(() => {
     fetchWords();
@@ -37,8 +38,12 @@ export const Cards = () => {
     }
   };
 
-    const onFlip = () => {
+  const onFlip = () => {
     addWord(words[currentIndex].english);
+  };
+
+  const onFocus = () => {
+    setPopUpMessage("Кликни");
   };
 
   return (
@@ -60,6 +65,8 @@ export const Cards = () => {
             transcription={words[currentIndex].transcription}
             russian={words[currentIndex].russian}
             onFlip={onFlip}
+            onFocus={onFocus}
+            popUpMessage={popUpMessage}
           />
         )}
 
