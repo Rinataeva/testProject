@@ -80,8 +80,18 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-  border-color: #e93c3c;
+  border-color: blueviolet;
   outline: none;
+}
+
+.input-error  {
+  border-color: 2px solid #e93c3c;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 @media (max-width: 1200px) {
