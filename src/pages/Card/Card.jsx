@@ -4,7 +4,7 @@ import "./styles.css";
 
 export const Card = ({ english, transcription, russian, onFlip }) => {
   const [flipped, setFlipped] = useState(false);
-  const seeTranslationButtonRef = useRef(null);  
+  const seeTranslationButtonRef = useRef(null);
 
   const handleCardClick = () => {
     setFlipped(!flipped);
@@ -12,10 +12,10 @@ export const Card = ({ english, transcription, russian, onFlip }) => {
   };
 
   useEffect(() => {
-        if (seeTranslationButtonRef.current) {
+    if (seeTranslationButtonRef.current) {
       seeTranslationButtonRef.current.focus();
     }
-  }, []); 
+  }, []);
 
   return (
     <div
@@ -32,11 +32,11 @@ export const Card = ({ english, transcription, russian, onFlip }) => {
         </div>
       </div>
       <button
-        ref={seeTranslationButtonRef}  
+        ref={seeTranslationButtonRef}
         className="see-translation-btn"
         onClick={handleCardClick}
       >
-       Click to see translation
+        Click to see translation
       </button>
     </div>
   );
