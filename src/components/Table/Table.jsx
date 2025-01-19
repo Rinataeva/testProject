@@ -1,33 +1,15 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
-import { cardApiService } from "../../ApiService/ApiService";
+import { useState } from "react";
 import "./styles.css";
 import editIcon from "../../assets/edit-icon.svg";
 import deleteIcon from "../../assets/delete-icon.svg";
 import saveIcon from "../../assets/save-icon.svg";
 import closeIcon from "../../assets/close-icon.svg";
+import { useWordsContext } from "../../context/WordsContext";
 
 export const Table = () => {
-  const [cards, setCards] = useState([]);
+  const { words } = useWordsContext();
 
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const data = await cardApiService.getWords();
-        setCards(data);
-      } catch (error) {
-        console.error("Ошибка при получении данных:", error);
-      }
-    };
-    fetchCards();
-  }, []);
-
-  // cards.forEach((card) => {
-  //   if (card.english && card.russian) {
-  //     card.english = card.english.toLowerCase();
-  //     card.russian = card.russian.toLowerCase();
-  //   }
-  // });
   return (
     <div className="table-wrapper">
       <table className="table" border="1">
@@ -41,7 +23,7 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {cards.map((card) => {
+          {words.map((card) => {
             return <TableRow rowData={card} key={card.id} />;
           })}
         </tbody>
@@ -52,6 +34,7 @@ export const Table = () => {
 const TableRow = ({ rowData }) => {
   console.log(rowData);
   const { id, english, transcription, russian } = rowData;
+
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({ id, english, transcription, russian });
 
@@ -78,7 +61,6 @@ const TableRow = ({ rowData }) => {
 
   const isEmptyField = () => {
     return !value.english || !value.russian || !value.transcription;
-
   };
 
   const getClassName = (field) => (value[field] === "" ? "input-error" : "");

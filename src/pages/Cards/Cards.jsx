@@ -1,42 +1,15 @@
-import { Link } from "react-router";
-import { ROUTES } from "../../routes/routes.js";
-import { Card } from "../Card/Card.jsx";
-import { useState, useEffect } from "react";
-import { cardApiService } from "../../ApiService/ApiService.js";
+import { useWordsContext } from "../../context/WordsContext";
+import { useContext, useState } from "react";
 import { CounterContext } from "../../context/CounterContext";
-import { useContext } from "react";
+import { Card } from "../Card/Card.jsx";
+import { Link } from "react-router";
 import "./styles.css";
 
 export const Cards = () => {
-  const [words, setWords] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { words, currentIndex, handleBackwardClick, handleForwardClick } =
+    useWordsContext();
   const { addWord } = useContext(CounterContext);
   const [popUpMessage, setPopUpMessage] = useState("");
-
-  useEffect(() => {
-    fetchWords();
-  }, []);
-
-  async function fetchWords() {
-    try {
-      const data = await cardApiService.getWords();
-      setWords(data);
-    } catch (error) {
-      console.error("Error fetching words:", error);
-    }
-  }
-
-  const handleBackwardClick = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
-  const handleForwardClick = () => {
-    if (currentIndex < words.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
 
   const onFlip = () => {
     addWord(words[currentIndex].english);
@@ -69,7 +42,6 @@ export const Cards = () => {
             popUpMessage={popUpMessage}
           />
         )}
-
         <button
           className="cards-swiper__button"
           onClick={handleForwardClick}
@@ -79,8 +51,8 @@ export const Cards = () => {
         </button>
       </div>
       <div className="cards__footer">
-        <Link to={ROUTES.home}>Back</Link>
-        <Link to={ROUTES.card}>Show the card</Link>
+        <Link to="/">Back</Link>
+        <Link to="/cards">Show the card</Link>
       </div>
     </section>
   );
