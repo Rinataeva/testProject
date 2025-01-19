@@ -5,7 +5,7 @@ import editIcon from "../../assets/edit-icon.svg";
 import deleteIcon from "../../assets/delete-icon.svg";
 import saveIcon from "../../assets/save-icon.svg";
 import closeIcon from "../../assets/close-icon.svg";
-import { useWordsContext } from "../../context/WordsContext";
+import { useWordsContext } from "../../hooks/useWordsContext";
 
 export const Table = () => {
   const { words } = useWordsContext();
