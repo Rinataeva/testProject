@@ -1,4 +1,4 @@
-import { useWordsContext } from "../../context/WordsContext";
+import { useWordsContext } from "../../hooks/useWordsContext.js";
 import { useContext, useState } from "react";
 import { CounterContext } from "../../context/CounterContext";
 import { Card } from "../Card/Card.jsx";
@@ -10,13 +10,32 @@ export const Cards = () => {
     useWordsContext();
   const { addWord } = useContext(CounterContext);
   const [popUpMessage, setPopUpMessage] = useState("");
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const onFlip = () => {
     addWord(words[currentIndex].english);
   };
 
-  const onFocus = () => {
-    setPopUpMessage("Кликни");
+  setTimeout(() => {
+    setPopUpMessage("");
+  }, 3000);
+
+  const handleMouseEnter = () => {
+    setPopUpMessage(`Нажми на карточку, чтобы увидеть перевод`);
+  };
+
+  const handleMouseLeave = () => {
+    setPopUpMessage("");
+  };
+
+  const handleBackward = () => {
+    handleBackwardClick();
+    setIsFlipped(false);
+  };
+
+  const handleForward = () => {
+    handleForwardClick();
+    setIsFlipped(false);
   };
 
   return (
@@ -27,7 +46,7 @@ export const Cards = () => {
       <div className="cards-swiper">
         <button
           className="cards-swiper__button"
-          onClick={handleBackwardClick}
+          onClick={handleBackward}
           disabled={currentIndex === 0}
         >
           {"<-"}
@@ -38,21 +57,25 @@ export const Cards = () => {
             transcription={words[currentIndex].transcription}
             russian={words[currentIndex].russian}
             onFlip={onFlip}
-            onFocus={onFocus}
             popUpMessage={popUpMessage}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            isFlipped={isFlipped}
+            setIsFlipped={setIsFlipped}
           />
         )}
         <button
           className="cards-swiper__button"
-          onClick={handleForwardClick}
+          onClick={handleForward}
           disabled={currentIndex === words.length - 1}
         >
           {"->"}
         </button>
       </div>
+      {popUpMessage && <div className="popup-message">{popUpMessage}</div>}
       <div className="cards__footer">
-        <Link to="/">Back</Link>
-        <Link to="/cards">Show the card</Link>
+        <Link to="/">Назад</Link>
+        <Link to="/cards">Редактировать карточку</Link>
       </div>
     </section>
   );

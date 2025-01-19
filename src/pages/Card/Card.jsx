@@ -1,26 +1,27 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect, useRef } from "react";
 import "./styles.css";
 
-export const Card = ({ english, transcription, russian, onFlip }) => {
-  const [flipped, setFlipped] = useState(false);
-  const seeTranslationButtonRef = useRef(null);
-
+export const Card = ({
+  english,
+  transcription,
+  russian,
+  onFlip,
+  onMouseEnter,
+  onMouseLeave,
+  isFlipped,
+  setIsFlipped,
+}) => {
   const handleCardClick = () => {
-    setFlipped(!flipped);
+    setIsFlipped(!isFlipped);
     onFlip();
   };
 
-  useEffect(() => {
-    if (seeTranslationButtonRef.current) {
-      seeTranslationButtonRef.current.focus();
-    }
-  }, []);
-
   return (
     <div
-      className={`card ${flipped ? "card--flipped" : ""}`}
+      className={`card ${isFlipped ? "card--flipped" : ""}`}
       onClick={handleCardClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="card__inner">
         <div className="card__front">
@@ -31,13 +32,6 @@ export const Card = ({ english, transcription, russian, onFlip }) => {
           <h2>{russian}</h2>
         </div>
       </div>
-      <button
-        ref={seeTranslationButtonRef}
-        className="see-translation-btn"
-        onClick={handleCardClick}
-      >
-        Click to see translation
-      </button>
     </div>
   );
 };
