@@ -7,6 +7,7 @@ export const WordsProvider = ({ children }) => {
     currentIndex,
     error,
     loading,
+    deleteWord,
     handleBackwardClick,
     handleForwardClick,
   } = useWords();
@@ -25,7 +26,13 @@ export const WordsProvider = ({ children }) => {
 
   return (
     <WordsContext.Provider
-      value={{ words, currentIndex, handleBackwardClick, handleForwardClick }}
+      value={{
+        words,
+        currentIndex,
+        handleBackwardClick,
+        handleForwardClick,
+        deleteWord,
+      }}
     >
       {children}
     </WordsContext.Provider>

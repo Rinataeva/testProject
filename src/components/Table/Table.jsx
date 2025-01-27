@@ -34,7 +34,7 @@ export const Table = () => {
 const TableRow = ({ rowData }) => {
   console.log(rowData);
   const { id, english, transcription, russian } = rowData;
-
+  const { deleteWord } = useWordsContext();
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({ id, english, transcription, russian });
 
@@ -57,6 +57,10 @@ const TableRow = ({ rowData }) => {
 
   function handleEdit() {
     setIsSelected(!isSelected);
+  }
+
+  function handleDelete() {
+    deleteWord(id);
   }
 
   const isEmptyField = () => {
@@ -118,7 +122,7 @@ const TableRow = ({ rowData }) => {
         <button className="table__button" onClick={handleEdit}>
           <img src={editIcon} className="table__button_icon" alt="edit" />
         </button>
-        <button className="table__button">
+        <button className="table__button" onClick={handleDelete}>
           <img src={deleteIcon} className="table__button_icon" alt="delete" />
         </button>
       </td>

@@ -7,6 +7,10 @@ export const useWords = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const deleteWord = useCallback((id) => {
+    setWords((prevWords) => prevWords.filter((word) => word.id !== id));
+  }, []);
+
   useEffect(() => {
     const fetchWords = async () => {
       setLoading(true);
@@ -44,6 +48,7 @@ export const useWords = () => {
     currentIndex,
     error,
     loading,
+    deleteWord,
     handleBackwardClick,
     handleForwardClick,
   };
