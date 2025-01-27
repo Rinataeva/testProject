@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../routes/routes.js";
 import { Table } from "../../components/Table/Table.jsx";
+import { AddWordForm } from "../../components/AddWordForm/index.js";
 import "./styles.css";
 
 export const Home = () => {
@@ -17,6 +18,7 @@ export const Home = () => {
     <div className="home-page">
       <h2>Be wild in learning</h2>
       <h3>as in conversation</h3>
+            <AddWordForm />
       <p>
         <Link to={ROUTES.cards} className="home-page__link">Get started</Link>
       </p>
