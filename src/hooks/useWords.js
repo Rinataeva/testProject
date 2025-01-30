@@ -1,40 +1,40 @@
 import { useState, useEffect, useCallback } from "react";
-import { cardApiService } from "../ApiService/ApiService";
+import { wordApiService } from "../ApiService/ApiService";
 
-export const useWords = () => {
+export function useWords() {
   const [words, setWords] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const deleteWord = useCallback((id) => {
-    setWords((prevWords) => prevWords.filter((word) => word.id !== id));
-  }, []);
+  const createWord = async (data) => {
+    const newWords = words.concat(data);
+
+    await wordApiService.create(data);
+
+    setWords(newWords);
+  };
+
+  const deleteWord = async (id) => {
+    await wordApiService.delete(id);
+    const newWords = words.filter(({ id: wordId }) => wordId !== id);
+    setWords(newWords);
+  };
+
+  const updateWord = async (updatedWord) => {
+    await wordApiService.update(updatedWord, updatedWord.id);
+    setWords((prevWords) =>
+      prevWords.map((word) =>
+        word.id === updatedWord.id ? { ...word, ...updatedWord } : word
+      )
+    );
+  };
 
   useEffect(() => {
-    const fetchWords = async () => {
-      setLoading(true);
-      try {
-        const data = await cardApiService.getWords();
-        if (data && Array.isArray(data)) {
-          setWords(data);
-          if (data.length === 0) {
-            setCurrentIndex(0);
-          }
-        } else {
-          throw new Error("Формат данных не соответсвует ожидаемому");
-        }
-      } catch (err) {
-        setError("Ошибка загрузки. Попробуйте позже");
-        console.error("Ошибка", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWords();
+    wordApiService.fetchWords().then((words) => {
+      setWords(words);
+      setLoading(false);
+    });
   }, []);
-
   const handleBackwardClick = useCallback(() => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   }, []);
@@ -45,11 +45,12 @@ export const useWords = () => {
 
   return {
     words,
-    currentIndex,
-    error,
     loading,
+    createWord,
     deleteWord,
+    updateWord,
     handleBackwardClick,
     handleForwardClick,
+    currentIndex,
   };
-};
+}

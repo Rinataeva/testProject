@@ -8,7 +8,11 @@ import closeIcon from "../../assets/close-icon.svg";
 import { useWordsContext } from "../../hooks/useWordsContext";
 
 export const Table = () => {
-  const { words } = useWordsContext();
+  const { words, loading, deleteWord, updateWord } = useWordsContext();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="table-wrapper">
@@ -17,24 +21,31 @@ export const Table = () => {
           <tr>
             <th>n/n</th>
             <th>English</th>
-            <th>pronunciation</th>
+            <th>Pronunciation</th>
             <th>Russian</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {words.map((card) => {
-            return <TableRow rowData={card} key={card.id} />;
+          {words.map(({ id, english, transcription, russian }) => {
+            return (
+              <TableRow
+                key={id}
+                rowData={{ id, english, transcription, russian }}
+                deleteWord={deleteWord}  
+                updateWord={updateWord}  
+              />
+            );
           })}
         </tbody>
       </table>
     </div>
   );
 };
-const TableRow = ({ rowData }) => {
+
+const TableRow = ({ rowData, deleteWord, updateWord }) => {
   console.log(rowData);
   const { id, english, transcription, russian } = rowData;
-  const { deleteWord } = useWordsContext();
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({ id, english, transcription, russian });
 
@@ -51,7 +62,7 @@ const TableRow = ({ rowData }) => {
   }
 
   function handleSave() {
-    setValue({ ...value });
+    updateWord(value);  
     setIsSelected(!isSelected);
   }
 
@@ -60,7 +71,7 @@ const TableRow = ({ rowData }) => {
   }
 
   function handleDelete() {
-    deleteWord(id);
+    deleteWord(id);  
   }
 
   const isEmptyField = () => {
@@ -122,7 +133,7 @@ const TableRow = ({ rowData }) => {
         <button className="table__button" onClick={handleEdit}>
           <img src={editIcon} className="table__button_icon" alt="edit" />
         </button>
-        <button className="table__button" onClick={handleDelete}>
+        <button type="button" className="table__button" onClick={handleDelete}>
           <img src={deleteIcon} className="table__button_icon" alt="delete" />
         </button>
       </td>

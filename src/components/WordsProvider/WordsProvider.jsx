@@ -5,33 +5,25 @@ export const WordsProvider = ({ children }) => {
   const {
     words,
     currentIndex,
-    error,
     loading,
+    createWord,
     deleteWord,
+    updateWord,
     handleBackwardClick,
     handleForwardClick,
   } = useWords();
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  if (words.length === 0) {
-    return <div>Слова недоступны. Попробуйте позже</div>;
-  }
 
   return (
     <WordsContext.Provider
       value={{
         words,
         currentIndex,
+        loading,
+        createWord,
+        deleteWord,
+        updateWord,
         handleBackwardClick,
         handleForwardClick,
-        deleteWord,
       }}
     >
       {children}
