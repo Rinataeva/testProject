@@ -1,14 +1,36 @@
 const API_URL = "http://itgirlschool.justmakeit.ru/api/words";
-class CardApiService {
-  async getWords() {
-    try {
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Ошибка при получении данных:", error);
-      return [];
-    }
+class WordApiService {
+  async fetchWords() {
+    const response = await fetch(API_URL);
+    return await response.json();
+  }
+  async create(word) {
+    await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(word),
+    });
+  }
+  async update(word, id) {
+    await fetch(`${API_URL}/${id}/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(word),
+    });
+  }
+  async delete(id) {
+    await fetch(`${API_URL}/${id}/delete`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 }
-export const cardApiService = new CardApiService();
+
+export const wordApiService = new WordApiService();
+
