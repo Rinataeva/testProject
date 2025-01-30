@@ -21,7 +21,13 @@ export function useWords() {
   };
 
   const updateWord = async (updatedWord) => {
-    await wordApiService.update(updatedWord, updatedWord.id);
+    const updatedWordData = {
+      ...updatedWord,
+      tags: "",
+      tags_json: "",
+      id: updatedWord.id,
+    };
+    await wordApiService.update(updatedWordData, updatedWord.id);
     setWords((prevWords) =>
       prevWords.map((word) =>
         word.id === updatedWord.id ? { ...word, ...updatedWord } : word
