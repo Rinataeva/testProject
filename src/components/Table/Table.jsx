@@ -32,8 +32,8 @@ export const Table = () => {
               <TableRow
                 key={id}
                 rowData={{ id, english, transcription, russian }}
-                deleteWord={deleteWord}  
-                updateWord={updateWord}  
+                deleteWord={deleteWord}
+                updateWord={updateWord}
               />
             );
           })}
@@ -62,7 +62,7 @@ const TableRow = ({ rowData, deleteWord, updateWord }) => {
   }
 
   function handleSave() {
-    updateWord(value);  
+    updateWord(value);
     setIsSelected(!isSelected);
   }
 
@@ -71,7 +71,7 @@ const TableRow = ({ rowData, deleteWord, updateWord }) => {
   }
 
   function handleDelete() {
-    deleteWord(id);  
+    deleteWord(id);
   }
 
   const isEmptyField = () => {

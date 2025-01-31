@@ -1,6 +1,6 @@
-import { useState, useContext} from "react";
-import { WordsStoreContext } from "../../store/WordsStoreContext/WordsStoreContext.js";
-import "./styles.css";  
+import { useState, useContext } from "react";
+import { WordsStoreContext } from "../../store/WordsStore/WordsStoreContext";
+import "./styles.css";
 
 export const AddWordForm = () => {
   const [english, setEnglish] = useState("");
@@ -12,14 +12,14 @@ export const AddWordForm = () => {
     e.preventDefault();
 
     if (english && russian && transcription) {
-        store.addWord(english, transcription, russian);
-        setEnglish("");
-        setRussian("");
-        setTranscription("");
-      } else {
-        alert("Please fill in all fields");
-      }
-    };
+      store.addWord(english, transcription, russian);
+      setEnglish("");
+      setRussian("");
+      setTranscription("");
+    } else {
+      alert("Please fill in all fields");
+    }
+  };
 
   return (
     <div>
@@ -45,8 +45,10 @@ export const AddWordForm = () => {
           onChange={(e) => setTranscription(e.target.value)}
           className="add-word-input"
         />
-        <button type="submit" className="add-word-button">Add word</button>
+        <button type="submit" className="add-word-button">
+          Add word
+        </button>
       </form>
     </div>
   );
-}; 
+};
