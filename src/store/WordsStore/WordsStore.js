@@ -1,36 +1,33 @@
+// WordsStore.js
 import { makeAutoObservable } from "mobx";
 import { v4 as uuidv4 } from "uuid";
-import {cardApiService} from "../../ApiService/ApiService.js";
+import { wordApiService } from "../../ApiService/ApiService.js";
 
 class WordsStore {
   words = [];
-  currentIndex = 0;
-  error = null;
   loading = false;
+  error = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  // Load words from API
   async loadWords() {
     this.loading = true;
     try {
-      const data = await cardApiService.getWords();  
+      const data = await wordApiService.getWords();
       if (Array.isArray(data)) {
-        this.words = data;  
+        this.words = data; // Update words
       } else {
-        throw new Error("Данные не в ожидаемом формате");
+        throw new Error("Invalid data format");
       }
     } catch (err) {
-      this.error = "Ошибка загрузки данных. Попробуйте позже.";  
-      console.error("Ошибка при загрузке данных", err);
+      this.error = "Error loading data. Try again later.";
+      console.error("Error loading data", err);
     } finally {
       this.loading = false;
     }
-  }
-
-  deleteWord(id) {
-    this.words = this.words.filter(word => word.id !== id);
   }
 
   async addWord(english, transcription, russian) {
@@ -42,34 +39,35 @@ class WordsStore {
     };
 
     this.words.push(newWord);
-    
-   try {
-    await cardApiService.addWord(newWord);  // Assuming addWord is a method in your API service to save to server
-  } catch (err) {
-    console.error("Error adding word to the server:", err);
-    // Optionally, revert local changes if needed
-    this.words = this.words.filter(word => word.id !== newWord.id);
-  }
-}
 
-  handleBackwardClick() {
-    if (this.currentIndex > 0) {
-      this.currentIndex -= 1;
+    try {
+      await wordApiService.addWord(newWord);
+    } catch (err) {
+      console.error("Error adding word to server:", err);
+
+      this.words = this.words.filter((word) => word.id !== newWord.id);
     }
   }
 
-  handleForwardClick() {
-    if (this.currentIndex < this.words.length - 1) {
-      this.currentIndex += 1;
-    }
+  deleteWord(id) {
+    this.words = this.words.filter((word) => word.id !== id);
+    wordApiService.deleteWord(id); // Delete from server
   }
 
-  setError(errorMessage) {
-    this.error = errorMessage;
-  }
-
-  setLoading(isLoading) {
-    this.loading = isLoading;
+  async updateWord(updatedWord) {
+    const { id, english, transcription, russian } = updatedWord;
+    const wordToUpdate = {
+      id,
+      english,
+      transcription,
+      russian,
+      tags: "",
+      tags_json: "",
+    };
+    await wordApiService.updateWord(wordToUpdate, id);
+    this.words = this.words.map((word) =>
+      word.id === id ? { ...word, ...updatedWord } : word
+    );
   }
 }
 
