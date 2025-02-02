@@ -10,21 +10,21 @@ class WordsStore {
 
   constructor() {
     makeAutoObservable(this);
+    this.loadWords();
   }
 
-  // Load words from API
   async loadWords() {
     this.loading = true;
     try {
-      const data = await wordApiService.getWords();
+      const data = await wordApiService.fetchWords();
       if (Array.isArray(data)) {
-        this.words = data; // Update words
+        this.words = data;
       } else {
-        throw new Error("Invalid data format");
+        throw new Error("Формат данных не соответствует ожидаемому");
       }
     } catch (err) {
-      this.error = "Error loading data. Try again later.";
-      console.error("Error loading data", err);
+      this.error = "Ошибка загрузки слов. Попробуйте позже";
+      console.error("Ошибка загрузки данных", err);
     } finally {
       this.loading = false;
     }
@@ -41,17 +41,16 @@ class WordsStore {
     this.words.push(newWord);
 
     try {
-      await wordApiService.addWord(newWord);
+      await wordApiService.create(newWord);
     } catch (err) {
       console.error("Error adding word to server:", err);
-
       this.words = this.words.filter((word) => word.id !== newWord.id);
     }
   }
 
   deleteWord(id) {
     this.words = this.words.filter((word) => word.id !== id);
-    wordApiService.deleteWord(id); // Delete from server
+    wordApiService.delete(id);
   }
 
   async updateWord(updatedWord) {
@@ -64,10 +63,14 @@ class WordsStore {
       tags: "",
       tags_json: "",
     };
-    await wordApiService.updateWord(wordToUpdate, id);
-    this.words = this.words.map((word) =>
-      word.id === id ? { ...word, ...updatedWord } : word
-    );
+    try {
+      await wordApiService.update(wordToUpdate, id);
+      this.words = this.words.map((word) =>
+        word.id === id ? { ...word, ...updatedWord } : word
+      );
+    } catch (err) {
+      console.log("Error updating on server", err);
+    }
   }
 }
 

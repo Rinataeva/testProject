@@ -1,14 +1,18 @@
 /* eslint-disable react/prop-types */
+import { observer } from "mobx-react";
 import { useState } from "react";
-import "./styles.css";
+import { useContext } from "react";
+import { WordsStoreContext } from "../../store/WordsStore/WordsStoreContext";
+// import { useWordsContext } from "../../hooks/useWordsContext";
 import editIcon from "../../assets/edit-icon.svg";
 import deleteIcon from "../../assets/delete-icon.svg";
 import saveIcon from "../../assets/save-icon.svg";
 import closeIcon from "../../assets/close-icon.svg";
-import { useWordsContext } from "../../hooks/useWordsContext";
 
-export const Table = () => {
-  const { words, loading, deleteWord, updateWord } = useWordsContext();
+import "./styles.css";
+export const Table = observer(() => {
+  const { words, loading, deleteWord, updateWord } =
+    useContext(WordsStoreContext);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -41,14 +45,14 @@ export const Table = () => {
       </table>
     </div>
   );
-};
+});
 
 const TableRow = ({ rowData, deleteWord, updateWord }) => {
   console.log(rowData);
   const { id, english, transcription, russian } = rowData;
   const [isSelected, setIsSelected] = useState(false);
   const [value, setValue] = useState({ id, english, transcription, russian });
-
+  const store = useContext(WordsStoreContext);
   function handleChange(e) {
     setValue((prevValue) => ({
       ...prevValue,
@@ -62,7 +66,7 @@ const TableRow = ({ rowData, deleteWord, updateWord }) => {
   }
 
   function handleSave() {
-    updateWord(value);
+    store.updateWord(value);
     setIsSelected(!isSelected);
   }
 
@@ -71,7 +75,7 @@ const TableRow = ({ rowData, deleteWord, updateWord }) => {
   }
 
   function handleDelete() {
-    deleteWord(id);
+    store.deleteWord(id);
   }
 
   const isEmptyField = () => {
