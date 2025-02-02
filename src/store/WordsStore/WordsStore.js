@@ -5,12 +5,25 @@ import { wordApiService } from "../../ApiService/ApiService.js";
 
 class WordsStore {
   words = [];
+  currentIndex = 0;
   loading = false;
   error = null;
 
   constructor() {
     makeAutoObservable(this);
     this.loadWords();
+  }
+
+  handleBackwardClick() {
+    if (this.currentIndex > 0) {
+      this.currentIndex -= 1;
+    }
+  }
+
+  handleForwardClick() {
+    if (this.currentIndex < this.words.length - 1) {
+      this.currentIndex += 1;
+    }
   }
 
   async loadWords() {

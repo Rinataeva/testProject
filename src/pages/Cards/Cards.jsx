@@ -1,5 +1,5 @@
-import { useWordsContext } from "../../hooks/useWordsContext.js";
-import { useContext, useState } from "react";
+import { WordsStoreContext } from "../../store/WordsStore/WordsStoreContext.js";
+import { useContext, useState, useEffect } from "react";
 import { CounterContext } from "../../context/CounterContext";
 import { Card } from "../Card/Card.jsx";
 import { Link } from "react-router";
@@ -7,18 +7,21 @@ import "./styles.css";
 
 export const Cards = () => {
   const { words, currentIndex, handleBackwardClick, handleForwardClick } =
-    useWordsContext();
-  const { addWord } = useContext(CounterContext);
+    useContext(WordsStoreContext); // Use WordsStoreContext to get words
+  const { addWord } = useContext(CounterContext); // CounterContext for counting words
   const [popUpMessage, setPopUpMessage] = useState("");
   const [isFlipped, setIsFlipped] = useState(false);
 
   const onFlip = () => {
-    addWord(words[currentIndex].english);
+    addWord(words[currentIndex].english); // Add word to counter on flip
   };
 
-  setTimeout(() => {
-    setPopUpMessage("");
-  }, 3000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPopUpMessage("");
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [popUpMessage]);
 
   const handleMouseEnter = () => {
     setPopUpMessage(`Нажми на карточку, чтобы увидеть перевод`);

@@ -47,7 +47,7 @@ export const Table = observer(() => {
   );
 });
 
-const TableRow = ({ rowData, deleteWord, updateWord }) => {
+const TableRow = ({ rowData }) => {
   console.log(rowData);
   const { id, english, transcription, russian } = rowData;
   const [isSelected, setIsSelected] = useState(false);
