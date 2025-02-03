@@ -1,6 +1,4 @@
-// WordsStore.js
 import { makeAutoObservable } from "mobx";
-import { v4 as uuidv4 } from "uuid";
 import { wordApiService } from "../../ApiService/ApiService.js";
 
 class WordsStore {
@@ -45,7 +43,7 @@ class WordsStore {
 
   async addWord(english, transcription, russian) {
     const newWord = {
-      id: uuidv4(),
+      id: this.words.length,
       english,
       transcription,
       russian,
