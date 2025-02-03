@@ -1,19 +1,29 @@
-import { WordsStoreContext } from "../../store/WordsStore/WordsStoreContext.js";
 import { useContext, useState, useEffect } from "react";
+import { WordsStoreContext } from "../../store/WordsStore/WordsStoreContext.js";
 import { CounterContext } from "../../context/CounterContext";
 import { Card } from "../Card/Card.jsx";
 import { Link } from "react-router";
 import "./styles.css";
 
 export const Cards = () => {
-  const { words, currentIndex, handleBackwardClick, handleForwardClick } =
-    useContext(WordsStoreContext); // Use WordsStoreContext to get words
-  const { addWord } = useContext(CounterContext); // CounterContext for counting words
+  const {
+    words,
+    currentIndex,
+    handleBackwardClick,
+    handleForwardClick,
+    loading,
+  } = useContext(WordsStoreContext);
+  const { addWord } = useContext(CounterContext);
   const [popUpMessage, setPopUpMessage] = useState("");
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const safeIndex =
+    currentIndex >= 0 && currentIndex < words.length ? currentIndex : 0;
+
   const onFlip = () => {
-    addWord(words[currentIndex].english); // Add word to counter on flip
+    if (words[safeIndex]) {
+      addWord(words[safeIndex].english);
+    }
   };
 
   useEffect(() => {
@@ -41,24 +51,32 @@ export const Cards = () => {
     setIsFlipped(false);
   };
 
+  if (loading) {
+    return <div>Loading words...</div>;
+  }
+
+  if (words.length === 0) {
+    return <div>No words available. Please add words to start reviewing.</div>;
+  }
+
   return (
     <section className="cards-section">
       <div className="progress">
-        {currentIndex + 1}/{words.length}
+        {safeIndex + 1}/{words.length}
       </div>
       <div className="cards-swiper">
         <button
           className="cards-swiper__button"
           onClick={handleBackward}
-          disabled={currentIndex === 0}
+          disabled={safeIndex === 0}
         >
           {"<-"}
         </button>
         {words.length > 0 && (
           <Card
-            english={words[currentIndex].english}
-            transcription={words[currentIndex].transcription}
-            russian={words[currentIndex].russian}
+            english={words[safeIndex].english}
+            transcription={words[safeIndex].transcription}
+            russian={words[safeIndex].russian}
             onFlip={onFlip}
             popUpMessage={popUpMessage}
             onMouseEnter={handleMouseEnter}
@@ -70,7 +88,7 @@ export const Cards = () => {
         <button
           className="cards-swiper__button"
           onClick={handleForward}
-          disabled={currentIndex === words.length - 1}
+          disabled={safeIndex === words.length - 1}
         >
           {"->"}
         </button>
