@@ -1,28 +1,24 @@
 import { useContext, useState, useEffect } from "react";
 import { WordsStoreContext } from "../../store/WordsStore/WordsStoreContext.js";
 import { CounterContext } from "../../context/CounterContext";
+import { useBackAndForth } from "../../hooks/useBackAndForth.js";
 import { Card } from "../Card/Card.jsx";
 import { Link } from "react-router";
 import "./styles.css";
 
 export const Cards = () => {
-  const {
-    words,
-    currentIndex,
-    handleBackwardClick,
-    handleForwardClick,
-    loading,
-  } = useContext(WordsStoreContext);
+  const { words, loading } = useContext(WordsStoreContext);
   const { addWord } = useContext(CounterContext);
+
+  const { currentIndex, handleBackwardClick, handleForwardClick } =
+    useBackAndForth(0, words.length);
+
   const [popUpMessage, setPopUpMessage] = useState("");
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const safeIndex =
-    currentIndex >= 0 && currentIndex < words.length ? currentIndex : 0;
-
   const onFlip = () => {
-    if (words[safeIndex]) {
-      addWord(words[safeIndex].english);
+    if (words[currentIndex]) {
+      addWord(words[currentIndex].english);
     }
   };
 
@@ -62,21 +58,21 @@ export const Cards = () => {
   return (
     <section className="cards-section">
       <div className="progress">
-        {safeIndex + 1}/{words.length}
+        {currentIndex + 1}/{words.length}
       </div>
       <div className="cards-swiper">
         <button
           className="cards-swiper__button"
           onClick={handleBackward}
-          disabled={safeIndex === 0}
+          disabled={currentIndex === 0}
         >
           {"<-"}
         </button>
         {words.length > 0 && (
           <Card
-            english={words[safeIndex].english}
-            transcription={words[safeIndex].transcription}
-            russian={words[safeIndex].russian}
+            english={words[currentIndex].english}
+            transcription={words[currentIndex].transcription}
+            russian={words[currentIndex].russian}
             onFlip={onFlip}
             popUpMessage={popUpMessage}
             onMouseEnter={handleMouseEnter}
@@ -88,7 +84,7 @@ export const Cards = () => {
         <button
           className="cards-swiper__button"
           onClick={handleForward}
-          disabled={safeIndex === words.length - 1}
+          disabled={currentIndex === words.length - 1}
         >
           {"->"}
         </button>
