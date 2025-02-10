@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../routes/routes.js";
-import { Table } from "../../components/Table/Table.jsx";
-import { AddWordForm } from "../../components/AddWordForm/index.js";
+import { Table } from "../../components/Table";
+import { AddWordForm } from "../../components/AddWordForm";
 import "./styles.css";
 
 export const Home = () => {
@@ -22,12 +22,13 @@ export const Home = () => {
       <p>
         <Link to={ROUTES.cards} className="home-page__link">Get started</Link>
       </p>
-      <Table cards={[]} />
+      <Table cards={[]} 
+      />
       <button
         className="home-page__go-to-cards-button"
         onClick={goToCardsHandler}
       >
-        Go to cards
+        Train
       </button>
     </div>
   );

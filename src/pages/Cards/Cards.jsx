@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { WordsStoreContext } from "../../store/WordsStore/WordsStoreContext.js";
 import { CounterContext } from "../../context/CounterContext";
 import { useBackAndForth } from "../../hooks/useBackAndForth.js";
-import { Card } from "../Card/Card.jsx";
+import { Card } from "../Card";
 import { Link } from "react-router";
 import "./styles.css";
 
@@ -30,7 +30,7 @@ export const Cards = () => {
   }, [popUpMessage]);
 
   const handleMouseEnter = () => {
-    setPopUpMessage(`Нажми на карточку, чтобы увидеть перевод`);
+    setPopUpMessage(`Click the card to see the translation`);
   };
 
   const handleMouseLeave = () => {
@@ -56,44 +56,45 @@ export const Cards = () => {
   }
 
   return (
-    <section className="cards-section">
-      <div className="progress">
-        {currentIndex + 1}/{words.length}
-      </div>
-      <div className="cards-swiper">
-        <button
-          className="cards-swiper__button"
-          onClick={handleBackward}
-          disabled={currentIndex === 0}
-        >
-          {"<-"}
-        </button>
-        {words.length > 0 && (
-          <Card
-            english={words[currentIndex].english}
-            transcription={words[currentIndex].transcription}
-            russian={words[currentIndex].russian}
-            onFlip={onFlip}
-            popUpMessage={popUpMessage}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            isFlipped={isFlipped}
-            setIsFlipped={setIsFlipped}
-          />
-        )}
-        <button
-          className="cards-swiper__button"
-          onClick={handleForward}
-          disabled={currentIndex === words.length - 1}
-        >
-          {"->"}
-        </button>
-      </div>
-      {popUpMessage && <div className="popup-message">{popUpMessage}</div>}
-      <div className="cards__footer">
-        <Link to="/">Назад</Link>
-        <Link to="/cards">Редактировать карточку</Link>
-      </div>
-    </section>
+    <main className="cards-page"><section className="cards-section">
+    <div className="progress">
+      {currentIndex + 1}/{words.length}
+    </div>
+    <div className="cards-swiper">
+      <button
+        className="cards-swiper__button"
+        onClick={handleBackward}
+        disabled={currentIndex === 0}
+      >
+        {"<-"}
+      </button>
+      {words.length > 0 && (
+        <Card
+          english={words[currentIndex].english}
+          transcription={words[currentIndex].transcription}
+          russian={words[currentIndex].russian}
+          onFlip={onFlip}
+          popUpMessage={popUpMessage}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          isFlipped={isFlipped}
+          setIsFlipped={setIsFlipped}
+        />
+      )}
+      <button
+        className="cards-swiper__button"
+        onClick={handleForward}
+        disabled={currentIndex === words.length - 1}
+      >
+        {"->"}
+      </button>
+    </div>
+    {popUpMessage && <div className="popup-message">{popUpMessage}</div>}
+    <div className="cards__footer">
+      <Link to="/">Back</Link>
+      <Link to="/cards">Edit the card</Link>
+    </div>
+  </section></main>
+    
   );
 };
