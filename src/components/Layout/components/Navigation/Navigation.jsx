@@ -13,7 +13,7 @@ export function Navigation() {
           {title}
         </Link>
       ))}
-      <div>Progress: {counter} words</div>
+      <div>Your progress: {counter} words</div>
     </nav>
   );
 }

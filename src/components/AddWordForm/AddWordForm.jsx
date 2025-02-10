@@ -46,7 +46,7 @@ export const AddWordForm = () => {
           className="add-word-input"
         />
         <button type="submit" className="add-word-button">
-          Add word
+          Add
         </button>
       </form>
     </div>

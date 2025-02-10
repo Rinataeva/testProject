@@ -27,7 +27,7 @@ export const Table = observer(() => {
             <th>English</th>
             <th>Pronunciation</th>
             <th>Russian</th>
-            <th>Action</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
