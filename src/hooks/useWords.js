@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { wordApiService } from "../ApiService/ApiService";
+import { wordApiService } from "../ApiService";
 
 export function useWords() {
   const [words, setWords] = useState([]);
