@@ -12,7 +12,7 @@ html {
 }
 html {
   scroll-behavior: smooth;
-  font-size: calc(16px + (24 - 16) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(10px + (24 - 16) * ((100vw - 300px) / (1600 - 300)));
 }
 #root {
   display: flex;
